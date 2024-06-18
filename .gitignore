@@ -45,6 +45,8 @@ lerna-debug.log*
 # temp directory
 .temp
 .tmp
+ ./.docker/dbdata
+ theWeekFull.md
 
 # Runtime data
 pids

@@ -76,3 +76,23 @@ export class CreateEventDto {
 }
 ```
 
+go to file `events.service.ts`
+- inject tables, verbs are there. you can get, put, delete...
+test o the file `api.http`
+
+create a new resouce to spots
+```
+nest g resource
+```
+define a name `spots`,  `rest api` and generate the the entry points. 
+
+go to folder prisma on the root, open file shema.prima to define the spot table.
+
+now with te new table created, press the command to migrate it.
+`npx prisma migrate dev`
+
+ok, now go to folder src/spots/spots.service.ts and use the new table with constructor.
+
+
+### comands
+`docker-compose exec app bash` // acess to bash
