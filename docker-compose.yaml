@@ -2,18 +2,52 @@ version: '3.8'
 
 services:
   app:
-    build: .
-    ports:
-      - 3000:3000
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - .:/home/node/app
+    command: sh -c "npm install && npm start"
+    ports:
+      - "3001:3001" # Porta configurada
+    environment:
+      - PORT=3001 # Variável de ambiente para definir a porta no contêiner
+      - DATABASE_URL=${DATABASE_URL} # Variável de ambiente para o banco de dados
 
   db:
-    image: mysql:8.0.30-debian
+    image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: nest
     ports:
       - "3306:3306"
-    # volumes:
-    #   - ./.docker/dbdata:/var/lib/mysql
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
+
+
+# version: '3.8'
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - .:/home/node/app
+#     command: sh -c "npm install && npm start"
+
+#   db:
+#     image: mysql:8.0.30-debian
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: nest
+#     ports:
+#       - "3306:3306"
+#     # volumes:
+#     #   - ./.docker/dbdata:/var/lib/mysql
